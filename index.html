@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TREESO NATURA - Herbal care by kids, for a cleaner planet. Natural soaps and shampoos made with organic ingredients.">
+    <meta name="keywords" content="herbal care, natural products, organic skincare, handmade soaps, kids startup">
+    <meta name="author" content="TREESO NATURA">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="TREESO NATURA - Herbal Care by Kids">
+    <meta property="og:description" content="Natural, chemical-free skincare products made with organic ingredients by kid founders.">
+    <meta property="og:image" content="images/logo.jpeg">
+    <meta property="og:url" content="https://varad-bharote.github.io/Treeso-Natura">
+    <meta property="og:type" content="website">
+    <title>TREESO NATURA - Herbal Care by Kids</title>
+    <link rel="icon" href="images/logo.ico" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Top-right buttons -->
+    <div class="order-info">📦 Where to order: +91 9876543210</div>
+    
+    <!-- User info and auth links -->
+    <div class="auth-links">
+      <a href="signup.html" class="auth-link" id="signupLink">Sign Up</a>
+      <a href="login.html" class="auth-link" id="loginLink">Login</a>
+      <div class="user-box" id="userBox" style="display: none;">Welcome, <span id="usernameDisplay"></span>!</div>
+      <a href="#" class="auth-link" id="logoutLink" style="display: none;">Logout</a>
+    </div>
+    
+    <button class="assistant-button" onclick="togglePopup()">
+      🧴 Skincare Assistant
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="logo-title">
+        <img src="images/logo.jpeg" alt="TREESO NATURA Logo" />
+        <h1>TREESO NATURA</h1>
+      </div>
+      <p>Herbal care by kids, for a cleaner planet 🌍</p>
+      <div class="button-group">
+        <a href="soaps.html"><button>Explore Our Soaps</button></a>
+        <a href="shampoos.html"><button>Discover Our Shampoos</button></a>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about">
+      <h2>Who We Are</h2>
+      <p>
+        I am Varad, a kid entrepreneur —
+        building a startup that blends nature, creativity, and clean living.
+      </p>
+      <p>
+        Our mission is to create natural, chemical-free skincare products that 
+        are good for you and the environment. Every product is handmade with 
+        love and carefully selected herbal ingredients.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 TREESO NATURA | Made with 🌿 by kid founders</p>
+    </footer>
+
+    <!-- Skincare Assistant Popup -->
+    <div id="popup" class="popup-container">
+      <div class="popup-content">
+        <h2>🌿 Skincare Assistant</h2>
+        <p>
+          Tell us your skin type and concern — we'll suggest a herbal match!
+        </p>
+
+        <label for="skinType">
+          Skin Type:
+          <select id="skinType">
+            <option value="">-- Select your skin type --</option>
+            <option value="oily">Oily</option>
+            <option value="dry">Dry</option>
+            <option value="sensitive">Sensitive</option>
+            <option value="normal">Normal/Combination</option>
+          </select>
+        </label>
+
+        <label for="concern">
+          Concern:
+          <select id="concern">
+            <option value="">-- Select your concern --</option>
+            <option value="acne">Acne/Breakouts</option>
+            <option value="glow">Dullness/Lack of Glow</option>
+            <option value="dandruff">Dandruff/Scalp Issues</option>
+            <option value="oil-control">Excess Oil</option>
+            <option value="calm">Sensitivity/Redness</option>
+          </select>
+        </label>
+
+        <button onclick="recommendProduct()">Get Recommendation</button>
+        <p id="recommendation"></p>
+        <button onclick="togglePopup()">Close</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Check if user is logged in and update UI accordingly
+      document.addEventListener('DOMContentLoaded', function() {
+        const user = localStorage.getItem('username');
+        if (user) {
+          document.getElementById('signupLink').style.display = 'none';
+          document.getElementById('loginLink').style.display = 'none';
+          document.getElementById('userBox').style.display = 'flex';
+          document.getElementById('usernameDisplay').textContent = user;
+          document.getElementById('logoutLink').style.display = 'inline-flex';
+          
+          // Add logout functionality
+          document.getElementById('logoutLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('username');
+            location.reload();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

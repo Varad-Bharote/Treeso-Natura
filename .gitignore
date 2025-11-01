@@ -1,0 +1,46 @@
+# IDE files
+*.swp
+*.swo
+*.swn
+*.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
+
+# Compiled files
+*.min.js
+*.min.css
+
+# Database files (if any)
+*.db
+*.sqlite
+*.accdb
+
+# Node modules (if using Node.js)
+node_modules/
+
+# Build directories
+dist/
+build/
+out/
+
+# VS Code
+.vscode/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace

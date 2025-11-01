@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create an account with TREESO NATURA to access personalized skincare recommendations and exclusive offers.">
+    <meta name="keywords" content="signup, register, account, TREESO NATURA, herbal care">
+    <meta name="author" content="TREESO NATURA">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:title" content="Sign Up | TREESO NATURA">
+    <meta property="og:description" content="Create an account with TREESO NATURA to access personalized skincare recommendations and exclusive offers.">
+    <meta property="og:image" content="images/logo.jpeg">
+    <meta property="og:url" content="https://treesonatura.com/signup.html">
+    <meta property="og:type" content="website">
+    <title>Sign Up | TREESO NATURA</title>
+    <link rel="icon" href="images/logo.ico" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+        <p>Join our community of nature lovers and get personalized skincare recommendations!</p>
+        <div id="message" class="message" style="display: none;"></div>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Choose a username" required minlength="3">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="At least 6 characters" required minlength="6">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Retype your password" required>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
