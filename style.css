@@ -1,0 +1,577 @@
+/* Combined styles from both old and new CSS files */
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #f5fff5 0%, #e0f7e9 100%);
+  color: #2e4d3a;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section,
+header,
+footer {
+  max-width: 960px;
+  margin: auto;
+  padding: 3rem 2rem;
+}
+
+header.hero {
+  text-align: center;
+  background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 20px 20px;
+  padding: 4rem 2rem;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.logo-title img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo-title h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  color: #1b5e20;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header.hero p {
+  font-size: 1.3rem;
+  margin: 1.5rem 0 2.5rem;
+  color: #2e4d3a;
+  font-weight: 500;
+}
+
+header.hero .button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+header.hero button {
+  background-color: #388e3c;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  width: auto;
+  margin: 5px;
+  font-weight: 600;
+}
+
+header.hero button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  background-color: #2e7d32;
+}
+
+footer {
+  text-align: center;
+  background-color: #c8e6c9;
+  font-size: 1rem;
+  border-top: 2px solid #81c784;
+  padding: 2rem;
+  border-radius: 20px 20px 0 0;
+  margin-top: 2rem;
+}
+
+/* Top-right buttons */
+.order-info {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #388e3c;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Auth links and user box */
+.auth-links {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 12px;
+}
+
+.auth-link {
+  background-color: #6a1b9a;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  background-color: #4a148c;
+}
+
+.user-box {
+  background-color: #1b5e20;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.assistant-button {
+  position: fixed;
+  top: 85px;
+  right: 20px;
+  background-color: #6a1b9a;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.assistant-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  background-color: #4a148c;
+}
+
+/* Popup */
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f8e9;
+  border: 2px solid #aed581;
+  border-radius: 20px;
+  padding: 2.5rem;
+  z-index: 2000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  animation: popupAppear 0.3s ease;
+}
+
+@keyframes popupAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.popup-content h2 {
+  margin-top: 0;
+  color: #1b5e20;
+  font-size: 1.8rem;
+}
+
+.popup-content p {
+  margin: 1rem 0;
+  color: #2e4d3a;
+  font-size: 1.1rem;
+}
+
+.popup-content label {
+  display: block;
+  text-align: left;
+  margin: 1.5rem 0 0.5rem;
+  font-weight: 600;
+  color: #2e4d3a;
+  font-size: 1.1rem;
+}
+
+.popup-content select,
+.popup-content button {
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 2px solid #aed581;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  background-color: white;
+  color: #2e4d3a;
+  font-family: "Poppins", sans-serif;
+}
+
+.popup-content select:focus {
+  outline: none;
+  border-color: #388e3c;
+  box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.2);
+}
+
+.popup-content button {
+  background-color: #388e3c;
+  color: white;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.popup-content button:hover {
+  background-color: #2e7d32;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content #recommendation {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: #1b5e20;
+  font-size: 1.2rem;
+  min-height: 2rem;
+  padding: 1rem;
+  background-color: rgba(168, 230, 207, 0.3);
+  border-radius: 10px;
+}
+
+/* Login/Signup Form Styles */
+.container {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  margin: 100px auto;
+  animation: formAppear 0.5s ease;
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h2 {
+  text-align: center;
+  color: #1b5e20;
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2e4d3a;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #aed581;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #388e3c;
+  box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.2);
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin: 5px 0;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.actions {
+  margin: 25px 0;
+}
+
+.actions button {
+  width: 45%;
+  margin: 0 2.5%;
+}
+
+p {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #2e4d3a;
+  font-size: 1.1rem;
+}
+
+a {
+  color: #6a1b9a;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #4a148c;
+}
+
+.message {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  animation: messageAppear 0.3s ease;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Product pages */
+.products, .shampoos {
+  background-color: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 2rem auto;
+}
+
+.products h2, .shampoos h2 {
+  color: #1b5e20;
+  font-size: 2rem;
+  margin-top: 0;
+  text-align: center;
+}
+
+.products ul, .shampoos ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.products li, .shampoos li {
+  padding: 1.2rem;
+  margin: 1rem 0;
+  background-color: #f1f8e9;
+  border-radius: 12px;
+  border-left: 5px solid #388e3c;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.products li:before, .shampoos li:before {
+  content: "🌿";
+  font-size: 1.5rem;
+}
+
+/* About section */
+.about {
+  background-color: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.about h2 {
+  color: #1b5e20;
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  section,
+  header,
+  footer {
+    padding: 2rem 1.5rem;
+  }
+  
+  .logo-title {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .logo-title img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .logo-title h1 {
+    font-size: 2.5rem;
+  }
+  
+  header.hero {
+    padding: 3rem 1.5rem;
+  }
+  
+  header.hero p {
+    font-size: 1.1rem;
+  }
+  
+  header.hero button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .order-info, .auth-links, .assistant-button {
+    position: static;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 300px;
+    justify-content: center;
+  }
+  
+  .auth-links {
+    flex-wrap: wrap;
+  }
+  
+  .container {
+    margin: 50px auto;
+    padding: 2rem;
+    width: 90%;
+  }
+  
+  .popup-container {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+  
+  .products, .shampoos, .about {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-title h1 {
+    font-size: 2rem;
+  }
+  
+  header.hero p {
+    font-size: 1rem;
+  }
+  
+  header.hero button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .popup-content select,
+  .popup-content button {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+}
