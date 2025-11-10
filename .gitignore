@@ -1,14 +1,47 @@
+# Backend - Deploy separately, NOT to GitHub Pages
+Backend/
+
+# Documentation files (optional - uncomment if you don't want to upload docs)
+# *.md
+# test_backend.html
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.accdb
+*.mdb
+
+# .NET build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# OS files
+*.DS_Store
+Thumbs.db
+Desktop.ini
+
 # IDE files
+.vscode/
+.vs/
+.idea/
 *.swp
 *.swo
 *.swn
-*.DS_Store
-Thumbs.db
+*.sublime-project
+*.sublime-workspace
 
-# Environment files
+# Environment files with secrets
 .env
 .env.local
 .env.production
+appsettings.Development.json
+appsettings.Production.json
 
 # Log files
 *.log
@@ -16,31 +49,13 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
-
-# Backup files
 *.bak
 *.backup
 
-# Compiled files
-*.min.js
-*.min.css
-
-# Database files (if any)
-*.db
-*.sqlite
-*.accdb
-
-# Node modules (if using Node.js)
+# Node modules
 node_modules/
 
 # Build directories
 dist/
 build/
 out/
-
-# VS Code
-.vscode/
-
-# Sublime Text
-*.sublime-project
-*.sublime-workspace

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend API Tester - TREESO NATURA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .status.checking {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        
+        .test-section h2 {
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .response {
+            background: #1a202c;
+            color: #68d391;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .info {
+            background: #ebf8ff;
+            padding: 15px;
+            border-left: 4px solid #4299e1;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Backend API Tester</h1>
+        
+        <div id="connectionStatus" class="status checking">
+            Checking backend connection...
+        </div>
+        
+        <div class="info">
+            <strong>Backend URL:</strong> <code id="apiUrl">http://localhost:5000</code><br>
+            <strong>Swagger:</strong> <a href="http://localhost:5000/swagger" target="_blank">http://localhost:5000/swagger</a>
+        </div>
+        
+        <!-- Test 1: Register -->
+        <div class="test-section">
+            <h2>📝 Test 1: Register New User</h2>
+            <input type="text" id="regUsername" placeholder="Username (e.g., testuser)" value="testuser">
+            <input type="email" id="regEmail" placeholder="Email (e.g., test@example.com)" value="test@example.com">
+            <input type="password" id="regPassword" placeholder="Password (min 6 chars)" value="password123">
+            <button onclick="testRegister()">Register User</button>
+            <div id="regResponse" class="response" style="display:none;"></div>
+        </div>
+        
+        <!-- Test 2: Login -->
+        <div class="test-section">
+            <h2>🔐 Test 2: Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username" value="testuser">
+            <input type="password" id="loginPassword" placeholder="Password" value="password123">
+            <button onclick="testLogin()">Login</button>
+            <div id="loginResponse" class="response" style="display:none;"></div>
+        </div>
+        
+        <!-- Test 3: Verify Token -->
+        <div class="test-section">
+            <h2>✅ Test 3: Verify Token</h2>
+            <p>First login to get a token, then click verify.</p>
+            <button onclick="testVerify()" id="verifyBtn" disabled>Verify Token</button>
+            <div id="verifyResponse" class="response" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let authToken = null;
+        
+        // Check backend connection on load
+        async function checkConnection() {
+            const statusDiv = document.getElementById('connectionStatus');
+            try {
+                const response = await fetch(`${API_URL.replace('/api', '')}/swagger/index.html`, { method: 'HEAD' });
+                if (response.ok || response.status === 301) {
+                    statusDiv.className = 'status success';
+                    statusDiv.textContent = '✅ Backend is running! All systems operational.';
+                } else {
+                    throw new Error('Backend not responding');
+                }
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '❌ Backend is not running!<br><br>' +
+                    '<strong>To fix:</strong><br>' +
+                    '1. Open terminal/command prompt<br>' +
+                    '2. Navigate to: Backend\\TreesoNaturaAPI<br>' +
+                    '3. Run: <code>dotnet run</code><br>' +
+                    '4. Wait for "Now listening on: http://localhost:5000"<br>' +
+                    '5. Refresh this page';
+            }
+        }
+        
+        async function testRegister() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const responseDiv = document.getElementById('regResponse');
+            
+            try {
+                responseDiv.style.display = 'block';
+                responseDiv.textContent = 'Sending request...';
+                
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    authToken = data.token;
+                    document.getElementById('verifyBtn').disabled = false;
+                    
+                    // Update login form
+                    document.getElementById('loginUsername').value = username;
+                    document.getElementById('loginPassword').value = password;
+                }
+                
+                responseDiv.textContent = JSON.stringify(data, null, 2);
+                responseDiv.style.color = data.success ? '#68d391' : '#fc8181';
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+                responseDiv.style.color = '#fc8181';
+            }
+        }
+        
+        async function testLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const responseDiv = document.getElementById('loginResponse');
+            
+            try {
+                responseDiv.style.display = 'block';
+                responseDiv.textContent = 'Sending request...';
+                
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    authToken = data.token;
+                    document.getElementById('verifyBtn').disabled = false;
+                }
+                
+                responseDiv.textContent = JSON.stringify(data, null, 2);
+                responseDiv.style.color = data.success ? '#68d391' : '#fc8181';
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+                responseDiv.style.color = '#fc8181';
+            }
+        }
+        
+        async function testVerify() {
+            const responseDiv = document.getElementById('verifyResponse');
+            
+            if (!authToken) {
+                responseDiv.style.display = 'block';
+                responseDiv.textContent = 'Error: No token available. Please login first.';
+                responseDiv.style.color = '#fc8181';
+                return;
+            }
+            
+            try {
+                responseDiv.style.display = 'block';
+                responseDiv.textContent = 'Sending request...';
+                
+                const response = await fetch(`${API_URL}/auth/verify`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                responseDiv.textContent = JSON.stringify(data, null, 2);
+                responseDiv.style.color = response.ok ? '#68d391' : '#fc8181';
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+                responseDiv.style.color = '#fc8181';
+            }
+        }
+        
+        // Check connection on page load
+        checkConnection();
+    </script>
+</body>
+</html>

@@ -1,8 +1,11 @@
+// API Configuration - Change this URL when deploying
+const API_URL = 'http://localhost:5000/api';
+
 // Client-side validation for signup form
 document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signupForm');
     if (signupForm) {
-        signupForm.addEventListener('submit', function(e) {
+        signupForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const username = signupForm.username.value.trim();
@@ -36,38 +39,56 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Save user to localStorage (in a real app, this would be sent to a server)
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            // Disable submit button to prevent multiple submissions
+            const submitBtn = signupForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating Account...';
             
-            // Check if user already exists
-            const userExists = users.some(user => user.username === username || user.email === email);
-            if (userExists) {
-                showMessage('Username or email already exists!', 'error');
-                return;
+            try {
+                // Send registration request to C# backend
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Save token and user info securely
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('username', data.user.username);
+                    localStorage.setItem('userEmail', data.user.email);
+                    
+                    showMessage('Account created successfully! Welcome, ' + username + '!', 'success');
+                    
+                    // Redirect to index after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                } else {
+                    showMessage(data.message || 'Registration failed. Please try again.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Create Account';
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showMessage('Unable to connect to server. Please make sure the backend is running.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
             }
-            
-            // Add new user
-            users.push({
-                username: username,
-                email: email,
-                password: password // In a real app, this should be hashed
-            });
-            
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('username', username);
-            
-            showMessage('Account created successfully! Welcome, ' + username + '!', 'success');
-            
-            // Redirect to index after a short delay
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
         });
     }
     
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const username = loginForm.username.value.trim();
@@ -79,21 +100,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Get users from localStorage
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            // Disable submit button to prevent multiple submissions
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Logging in...';
             
-            // Find user
-            const user = users.find(u => u.username === username && u.password === password);
-            if (user) {
-                localStorage.setItem('username', username);
-                showMessage('Login successful! Welcome, ' + username + '!', 'success');
+            try {
+                // Send login request to C# backend
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
                 
-                // Redirect to index after a short delay
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
-            } else {
-                showMessage('Invalid username or password!', 'error');
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Save token and user info securely
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('username', data.user.username);
+                    localStorage.setItem('userEmail', data.user.email);
+                    
+                    showMessage('Login successful! Welcome back, ' + username + '!', 'success');
+                    
+                    // Redirect to index after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                } else {
+                    showMessage(data.message || 'Invalid username or password!', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Log In';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showMessage('Unable to connect to server. Please make sure the backend is running.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Log In';
             }
         });
     }
