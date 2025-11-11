@@ -3,7 +3,7 @@
 // const API_URL = 'http://localhost:5000/api';
 
 // For production (Railway.app):
-const API_URL = 'https://YOUR-RAILWAY-URL.up.railway.app/api'; // Replace with your actual Railway URL
+const API_URL = 'https://treeso-natura-backend-production.up.railway.app/api';
 
 // Client-side validation for signup form
 document.addEventListener('DOMContentLoaded', function() {
