@@ -1,5 +1,9 @@
 // API Configuration - Change this URL when deploying
-const API_URL = 'http://localhost:5000/api';
+// For local development:
+// const API_URL = 'http://localhost:5000/api';
+
+// For production (Railway.app):
+const API_URL = 'https://YOUR-RAILWAY-URL.up.railway.app/api'; // Replace with your actual Railway URL
 
 // Client-side validation for signup form
 document.addEventListener('DOMContentLoaded', function() {
