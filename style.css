@@ -159,3 +159,21 @@ footer {
     text-align: center;
   }
 }
+.green-feature-list {
+  list-style: none !important; /* Kills the black bullet points */
+  padding: 0 !important;
+  margin: 1.5rem 0 0 0 !important;
+  text-align: left !important; /* Fixes the weird centering */
+}
+
+.green-feature-list li {
+  background-color: #e8f5e9 !important; /* Solid herbal green background */
+  padding: 1.2rem 1.8rem !important;
+  margin-bottom: 1rem !important;
+  border-radius: 16px !important;
+  border-left: 6px solid #388e3c !important; /* Dark green accent line */
+  display: block !important;
+  color: #1b5e20 !important;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
