@@ -1,43 +1,45 @@
 # Treeso-Natura
 
-## Description
+## Overview
 
-TREESO NATURA is a startup dedicated to providing clean, sustainable beauty products. Our website showcases our range of handmade, chemical-free herbal soaps crafted with natural ingredients to nourish your skin and promote a healthier planet.
+Treeso Natura is a small brand focused on clean, sustainable beauty products. This repository contains a static website showcasing our range of handmade, chemical-free herbal soaps crafted with natural ingredients.
 
-"Herbal care for a cleaner planet 🌍"
+> **Herbal care for a cleaner planet 🌍**
+
+## Project Structure
+
+- `index.html` – Home page with brand story and navigation.
+- `soaps.html` – Product catalog and details.
+- `face-wash.html` – Face wash product information.
+- `404.html` – Custom 404 error page.
+- `style.css` – Global styles.
+- `images/` – Product images and assets.
+
+## How to Run Locally
+
+1. Clone the repo:
+   ```sh
+   git clone https://github.com/varad-bharote/Treeso-Natura.git
+   ```
+2. Open `index.html` in your browser.
+
+> Tip: You can also use a simple local server (e.g., `python -m http.server`) to serve the files.
 
 ## Features
 
-- **Home Page**: Introduction to TREESO NATURA, our mission, and navigation to products.
-- **Soaps Page**: Detailed list of our herbal soaps, including descriptions and benefits.
-- **Responsive Design**: Styled with CSS for a clean and user-friendly experience.
-- **Contact Information**: Direct ordering details available on the site.
+- Responsive layout with clean styling.
+- Product showcase pages.
+- Easy to customize and extend.
 
-## Technologies Used
+## Built With
 
 - HTML5
 - CSS3
 
-## How to View
-
-Visit:
-
-### https://varad-bharote.github.io
-
-## Products
-
-Our soaps are made with 100% natural ingredients:
-
-- Kesar Chandan
-- Charcoal
-- Cherry Blossom - With Herbs
-- Honey Milk - With Walnut Scrub
-- Neem Tulsi
-- Honey Milk - With Ubtan
-
 ## Contact
 
-For orders: +91 8329475580
+For orders or inquiries:
+- Phone: +91 8329475580
 
 ## License
 
